@@ -27,7 +27,7 @@ const correctAnswers = {
 let isAllowedToStart = false;
 
 // Thời gian cho phép vào làm bài (theo giờ Server)
-const ALLOW_START_HOUR = 22; // x giờ sáng
+const ALLOW_START_HOUR = 0; // x giờ sáng
 const ALLOW_START_MINUTE_START = 0; // từ phút thứ xx của giờ
 const ALLOW_START_MINUTE_END = 59; // đến phút thứ xx của giờ
 
