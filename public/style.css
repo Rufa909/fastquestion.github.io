@@ -1,0 +1,149 @@
+/* Reset mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-image: url('/img/lich-nghi-le-quoc-khanh-2-9-nguoi-lao-dong.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container chung */
+#startScreen, #resultScreen {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+  position: relative;
+  z-index: 10; /* luôn nổi trên nền blur */
+}
+
+/* Exam screen (rõ khi làm bài) */
+#examScreen {
+  background: #fff;            /* nền trắng rõ ràng */
+  display: flex;
+  flex-direction: column;      /* để các phần tử xếp dọc */
+  justify-content: flex-start; /* bắt đầu từ trên xuống */
+  align-items: center;         /* căn giữa ngang */
+  padding: 40px 20px;
+  box-sizing: border-box;
+
+  width: 100%;       /* full chiều rộng */
+  height: 100vh;     /* full chiều cao màn hình */
+
+  position: fixed;   /* cố định che cả màn hình */
+  top: 0;
+  left: 0;
+
+  z-index: 10;
+  animation: fadeIn 0.6s ease-in-out;
+  overflow-y: auto;  /* nếu nội dung dài thì có cuộn */
+}
+
+
+
+/* Đồng hồ */
+#timer {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #e63946;
+}
+
+/* Style cho câu hỏi */
+.questions {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.questions:hover {
+  background: #f0f8ff;
+  border-color: #4facfe;
+}
+
+.questions p {
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.questions label {
+  display: block;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: #444;
+}
+
+.questions input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Input nhập tên */
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #4facfe;
+  outline: none;
+}
+
+/* Nút bấm */
+button {
+  background: #4facfe;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #00c6fb;
+}
+
+/* Animation xuất hiện */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile xoay ngang */
+@media screen and (orientation: portrait) {
+  body::before {
+    content: "📱 Vui lòng xoay ngang màn hình để tiếp tục!";
+    position: absolute;
+    top: 20px;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách kết quả</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h2>Danh sách kết quả</h2>
+  <table id="resultsTable">
+    <thead>
+      <tr>
+        <th>Tên</th>
+        <th>Điểm</th>
+        <th>Số câu</th>
+        <th>Ngày nộp</th>
+        <th>Xem chi tiết</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch("/users")
+      .then(res => res.json())
+      .then(users => {
+        const tbody = document.querySelector("#resultsTable tbody");
+        tbody.innerHTML = "";
+        users.forEach(user => {
+          const totalQ = Object.keys(user.answers || {}).length;
+          const score = Object.entries(user.answers || {}).filter(
+            ([q, ans]) => {
+              const correctAnswers = { q1:"B", q2:"C", q3:"C", q4:"A", q5:"D", q6:"B", q7:"D", q8:"B", q9:"C", q10:"A" };
+              return ans === correctAnswers[q];
+            }
+          ).length;
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${user.username}</td>
+            <td>${score}</td>
+            <td>${totalQ}</td>
+            <td>${new Date(user.submittedAt).toLocaleString()}</td>
+            <td><a href="xemdiem.html?username=${user.username}">Xem</a></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        document.body.innerHTML = `<p>Lỗi tải dữ liệu: ${err}</p>`;
+      });
+  </script>
+</body>
+</html>

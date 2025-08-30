@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài trắc nghiệm</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Màn hình bắt đầu -->
+    <div id="startScreen">
+      <h2>QUICK QUIZZ</h2>
+      <input type="text" id="nameInput" placeholder="Nhập tên..." />
+      <button onclick="startExam()">Bắt đầu</button>
+    </div>
+
+    <!-- Màn hình kết quả (sẽ hiển thị sau khi nộp bài) -->
+    <div id="resultScreen" style="display: none">
+      <h3>Kết quả bài thi</h3>
+      <p id="resultMessage"></p>
+      <!-- Thêm phần tử này để hiển thị kết quả -->
+       <div id="allResults"></div>
+        <button onclick="showAllResults()">Xem tất cả kết quả</button>
+
+      <button onclick="restartExam()">Làm lại bài</button>
+    </div>
+
+    <!-- Màn hình làm bài -->
+    <div id="examScreen" style="display: none">
+      <h2>Bài thi trắc nghiệm</h2>
+      <p id="timer">Thời gian: 00:00</p>
+      <form id="examForm">
+        <div class="questions">
+          <!-- Câu hỏi 1 -->
+          <div class="q1">
+            <p>
+              <b>Câu 1:</b>Ai là người đọc bản Tuyên ngôn Độc lập ngày 2/9/1945
+              tại Quảng trường Ba Đình?
+            </p>
+            <label
+              ><input type="radio" name="q1" value="A" /> A. Trường Chinh</label
+            >
+            <label
+              ><input type="radio" name="q1" value="B" /> B. Chủ tịch Hồ Chí
+              Minh</label
+            >
+            <label
+              ><input type="radio" name="q1" value="C" /> C. Võ Nguyên
+              Giáp</label
+            >
+            <label
+              ><input type="radio" name="q1" value="D" /> D. Phạm Văn
+              Đồng</label
+            >
+          </div>
+
+          <!-- Câu hỏi 2 -->
+          <div class="q2">
+            <p>
+              <b>Câu 2:</b>Vị tướng nào được xem là “Tổng tư lệnh đầu tiên” của
+              Quân đội nhân dân Việt Nam?
+            </p>
+            <label
+              ><input type="radio" name="q2" value="A" /> A. Lê Trọng Tấn</label
+            >
+            <label
+              ><input type="radio" name="q2" value="B" /> B. Nguyễn Chí
+              Thanh</label
+            >
+            <label
+              ><input type="radio" name="q2" value="C" /> C. Võ Nguyên
+              Giáp</label
+            >
+            <label
+              ><input type="radio" name="q2" value="D" /> D. Văn Tiến
+              Dũng</label
+            >
+          </div>
+
+          <!-- Câu hỏi 3 -->
+          <div class="q3">
+            <p>
+              <b>Câu 3:</b>Ai là người viết bản Tuyên ngôn Độc lập cùng Chủ tịch
+              Hồ Chí Minh?
+            </p>
+            <label
+              ><input type="radio" name="q3" value="A" /> A. Phạm Văn
+              Đồng</label
+            >
+            <label
+              ><input type="radio" name="q3" value="B" /> B. Nguyễn Chí
+              Thanh</label
+            >
+            <label
+              ><input type="radio" name="q3" value="C" /> C. Trường Chinh</label
+            >
+            <label
+              ><input type="radio" name="q3" value="D" /> D. Chủ tịch Hồ Chí
+              Minh</label
+            >
+          </div>
+
+          <!-- Câu hỏi 4 -->
+          <div class="q4">
+            <p>
+              <b>Câu 4:</b>Tổ chức nào được thành lập vào tháng 5/1941, đóng vai
+              trò lãnh đạo Cách mạng Tháng Tám?
+            </p>
+            <label
+              ><input type="radio" name="q4" value="A" /> A. Mặt trận Việt
+              Minh</label
+            >
+            <label
+              ><input type="radio" name="q4" value="B" /> B. Đảng Cộng sản Đông
+              Dương</label
+            >
+            <label
+              ><input type="radio" name="q4" value="C" /> C. Hội Việt Nam Cách
+              mạng Thanh niên</label
+            >
+            <label
+              ><input type="radio" name="q4" value="D" /> D. Việt Nam Quốc dân
+              Đảng</label
+            >
+          </div>
+
+          <!-- Câu hỏi 5 -->
+          <div class="q5">
+            <p>
+              <b>Câu 5:</b>Nhân vật nào từng là Tổng Bí thư Đảng Cộng sản Đông
+              Dương trước Cách mạng Tháng Tám?
+            </p>
+            <label
+              ><input type="radio" name="q5" value="A" /> A. Trường Chinh</label
+            >
+            <label><input type="radio" name="q5" value="B" /> B. Lê Duẩn</label>
+            <label
+              ><input type="radio" name="q5" value="C" /> C. Nguyễn Văn
+              Linh</label
+            >
+            <label
+              ><input type="radio" name="q5" value="D" /> D. Nguyễn Văn
+              Cừ</label
+            >
+          </div>
+
+          <!-- Câu hỏi 6 -->
+          <div class="q6">
+            <p>
+              <b>Câu 6:</b>Ai là người phụ trách công tác tuyên truyền trong
+              thời kỳ tiền khởi nghĩa?
+            </p>
+            <label
+              ><input type="radio" name="q6" value="A" /> A. Trần Phú</label
+            >
+            <label><input type="radio" name="q6" value="B" /> B. Tố Hữu</label>
+            <label
+              ><input type="radio" name="q6" value="C" /> C. Nguyễn Lương
+              Bằng</label
+            >
+            <label
+              ><input type="radio" name="q6" value="D" /> D. Phạm Văn
+              Đồng</label
+            >
+          </div>
+
+          <!-- Câu hỏi 7 -->
+          <div class="q7">
+            <p>
+              <b>Câu 7:</b>Nhân vật nào từng giữ chức Chủ tịch Quốc hội đầu tiên
+              của nước Việt Nam Dân chủ Cộng hòa?
+            </p>
+            <label
+              ><input type="radio" name="q7" value="A" /> A. Nguyễn Văn
+              Tố</label
+            >
+            <label
+              ><input type="radio" name="q7" value="B" /> B. Trường Chinh</label
+            >
+            <label
+              ><input type="radio" name="q7" value="C" /> C. Tôn Đức
+              Thắng</label
+            >
+            <label
+              ><input type="radio" name="q7" value="D" /> D. Bùi Bằng Đoàn
+            </label>
+          </div>
+
+          <!-- Câu hỏi 8 -->
+          <div class="q8">
+            <p>
+              <b>Câu 8:</b>Nhân vật nào từng giữ chức Bộ trưởng Bộ Nội vụ trong
+              Chính phủ lâm thời năm 1945?
+            </p>
+            <label
+              ><input type="radio" name="q8" value="A" /> A. Trần Huy
+              Liệu</label
+            >
+            <label
+              ><input type="radio" name="q8" value="B" /> B. Huỳnh Thúc
+              Kháng</label
+            >
+            <label
+              ><input type="radio" name="q8" value="C" /> C. Phan Kế Toại</label
+            >
+            <label
+              ><input type="radio" name="q8" value="D" /> D. Nguyễn Văn
+              Tố</label
+            >
+          </div>
+
+          <!-- Câu hỏi 9 -->
+          <div class="q9">
+            <p>
+              <b>Câu 9:</b>Nhà cách mạng nào từng bị thực dân Pháp xử tử tại Hóc
+              Môn, được xem là biểu tượng của tinh thần bất khuất Nam Bộ?
+            </p>
+            <label
+              ><input type="radio" name="q9" value="A" /> A. Võ Thị Sáu</label
+            >
+            <label
+              ><input type="radio" name="q9" value="B" /> B. Lê Văn Tám</label
+            >
+            <label
+              ><input type="radio" name="q9" value="C" /> C. Nguyễn Văn Trỗi
+            </label>
+            <label
+              ><input type="radio" name="q9" value="D" /> D. Trần Văn Ơn</label
+            >
+          </div>
+
+          <!-- Câu hỏi 10 -->
+          <div class="q10">
+            <p>
+              <b>Câu 10:</b>Nhân vật nào được giao nhiệm vụ tiếp quản Hà Nội sau
+              Cách mạng Tháng Tám?
+            </p>
+            <label
+              ><input type="radio" name="q10" value="A" /> A. Vũ Đình
+              Huỳnh</label
+            >
+            <label
+              ><input type="radio" name="q10" value="B" /> B. Phạm Ngọc
+              Thạch</label
+            >
+            <label
+              ><input type="radio" name="q10" value="C" /> C. Hoàng Quốc
+              Việt</label
+            >
+            <label
+              ><input type="radio" name="q10" value="D" /> D. Nguyễn Văn
+              Trân</label
+            >
+          </div>
+        </div>
+      </form>
+
+      <button onclick="submitExam()">Nộp bài</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
