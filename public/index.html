@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài kiểm tra trắc nghiệm</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="startScreen">
+      <div class="form-control">
+        <label for="HovaTen"><h1>Bài Trắc Nghiệm</h1></label>
+        <input type="text" id="hovaten" placeholder="Nhập họ và tên" />
+      </div>
+      <button id="startBtn" onclick="handleStartExam()">Bắt đầu làm bài</button>
+      <hr />
+      <div id="boxBtnStart">
+        <p>
+          <strong>Thời gian mở:</strong> Thứ Ba, ngày 29 tháng 4 năm 2025, 9:00
+          PM<br />
+          <strong>Thời gian đóng:</strong> Thứ Ba, ngày 29 tháng 4 năm 2025,
+          9:10 PM
+        </p>
+      </div>
+    </div>
+
+    <div id="examScreen" class="hidden">
+      <div class="timer" id="timer">Thời gian: 7:30</div>
+
+      <form id="examForm">
+        <div class="question">
+          <p>
+            <strong
+              >Câu 1. Đức, Áo - Hung và Italia là những nước thuộc phe?</strong
+            >
+          </p>
+          <input type="radio" name="q1" value="A" />A. Hiệp ước<br />
+          <input type="radio" name="q1" value="B" />B. Đồng minh<br />
+          <input type="radio" name="q1" value="C" />C. Liên minh<br />
+          <input type="radio" name="q1" value="D" />D. Phát xít<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 2. Chiến tranh thế giới thứ nhất được châm ngòi bởi sự kiện
+              nào dưới đây?</strong
+            >
+          </p>
+          <input type="radio" name="q2" value="A" />A. Đức tấn công Ba Lan<br />
+          <input type="radio" name="q2" value="B" />B. Áo - Hung tuyên chiến với
+          Xéc-bi<br />
+          <input type="radio" name="q2" value="C" />C. Anh tuyên chiến với
+          Đức<br />
+          <input type="radio" name="q2" value="D" />D. Thái tử Áo - Hung bị ám
+          sát tại Xéc-bi<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 3. Trước Chiến tranh thế giới thứ nhất, ở Việt Nam có những
+              giai cấp nào?</strong
+            >
+          </p>
+          <input type="radio" name="q3" value="A" />A. Địa chủ phong kiến và
+          nông dân<br />
+          <input type="radio" name="q3" value="B" />B. Địa chủ phong kiến, nông
+          dân, tư sản, tiểu tư sản và công nhân<br />
+          <input type="radio" name="q3" value="C" />C. Địa chủ phong kiến, nông
+          dân và công nhân<br />
+          <input type="radio" name="q3" value="D" />D. Địa chủ phong kiến, nông
+          dân và tiểu tư sản<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 4. Dưới chế độ thực dân phong kiến, giai cấp nông dân Việt
+              Nam có yêu cầu bức thiết nhất là gì?</strong
+            >
+          </p>
+          <input type="radio" name="q4" value="A" />A. Độc lập dân tộc<br />
+          <input type="radio" name="q4" value="B" />B. Ruộng đất<br />
+          <input type="radio" name="q4" value="C" />C. Quyền bình đẳng nam,
+          nữ<br />
+          <input type="radio" name="q4" value="D" />D. Được giảm tô, giảm tức<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 5. Nguyễn ái Quốc từ Liên Xô về Quảng Châu vào thời gian
+              nào?</strong
+            >
+          </p>
+          <input type="radio" name="q5" value="A" />A. 12/1924<br />
+          <input type="radio" name="q5" value="B" />B. 12/1925<br />
+          <input type="radio" name="q5" value="C" />C. 11/1924<br />
+          <input type="radio" name="q5" value="D" />D. 10/1924<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 6. Tổ chức cộng sản nào ra đời đầu tiên ở Việt Nam?</strong
+            >
+          </p>
+          <input type="radio" name="q6" value="A" />A. Hội Việt Nam cách mạng
+          thanh niên<br />
+          <input type="radio" name="q6" value="B" />B. Đông Dương cộng sản Đảng
+          <br />
+          <input type="radio" name="q6" value="C" />C. An Nam cộng sản Đảng<br />
+          <input type="radio" name="q6" value="D" />D. Đông Dương cộng sản liên
+          đoàn<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 7. Đối tượng nghiên cứu của khoa học Lịch sử Đảng Cộng sản
+              Việt Nam là?</strong
+            >
+          </p>
+          <input type="radio" name="q7" value="A" />A. Các cán bộ, đảng viên
+          Đảng Cộng sản Việt Nam<br />
+          <input type="radio" name="q7" value="B" />B. Những mặt hạn chế trong
+          quá trình lãnh đạo của Đảng<br />
+          <input type="radio" name="q7" value="C" />C. Sự ra đời, phát triển và
+          hoạt động lãnh đạo của Đảng qua các thời kỳ lịch sử<br />
+          <input type="radio" name="q7" value="D" />D. Các văn kiện của Đảng
+          chuẩn bị được lưu hành<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 8. Thực dân Pháp đã thực hiện chính sách gì về văn hoá xã hội
+              để cai trị nước ta?</strong
+            >
+          </p>
+          <input type="radio" name="q8" value="A" />A. Ngu dân<br />
+          <input type="radio" name="q8" value="B" />B. Bế quan toả cảng<br />
+          <input type="radio" name="q8" value="C" />C. Đốt sách chôn Nho<br />
+          <input type="radio" name="q8" value="D" />D. Chia để trị<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 9. Cuối thế kỷ XIX - đầu thế kỷ XX, nhiệm vụ hàng đầu cần
+              phải được giải quyết cấp thiết của cách mạng Việt Nam là?</strong
+            >
+          </p>
+          <input type="radio" name="q9" value="A" />A. Giải phóng dân tộc<br />
+          <input type="radio" name="q9" value="B" />B. Đấu tranh giai cấp<br />
+          <input type="radio" name="q9" value="C" />C. Canh tân đất nước<br />
+          <input type="radio" name="q9" value="D" />D. Chia lại ruộng đất<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 10. Sự kiện nào đã đánh dấu phong trào công nhân Việt Nam
+              hoàn toàn trở thành một phong trào tự giác?</strong
+            >
+          </p>
+          <input type="radio" name="q10" value="A" />A. Năm 1920, khi tổ chức
+          công hội ở Sài Gòn được thành lập<br />
+          <input type="radio" name="q10" value="B" />B. Năm 1925, khi cuộc bãi
+          công ở nhà máy Ba Son diễn ra rầm rộ<br />
+          <input type="radio" name="q10" value="C" />C. Năm 1929, khi có sự ra
+          đời của ba tổ chức cộng sản<br />
+          <input type="radio" name="q10" value="D" />D. Năm 1930, khi Đảng Cộng
+          sản Việt Nam ra đời<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 11. Phong trào đình công, bãi công của công nhân Việt Nam
+              trong những năm 1926 - 1929 thuộc khuynh hướng nào?</strong
+            >
+          </p>
+          <input type="radio" name="q11" value="A" />A. Khuynh hướng phong
+          kiến<br />
+          <input type="radio" name="q11" value="B" />B. Khuynh hướng dân chủ tư
+          sản<br />
+          <input type="radio" name="q11" value="C" />C. Khuynh hướng vô sản<br />
+          <input type="radio" name="q11" value="D" />D. Khuynh hướng dân chủ<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 12. Cơ quan ngôn luận của Hội Việt Nam Cách mạng Thanh niên
+              là tờ báo nào?</strong
+            >
+          </p>
+          <input type="radio" name="q12" value="A" />A. Người cùng khổ<br />
+          <input type="radio" name="q12" value="B" />B. Lao động<br />
+          <input type="radio" name="q12" value="C" />C. Công nhân<br />
+          <input type="radio" name="q12" value="D" />D. Thanh niên<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 13. Tổ chức nào được Nguyễn Ái Quốc thành lập tại Quảng Châu
+              (Trung Quốc) vào tháng 6/1925?</strong
+            >
+          </p>
+          <input type="radio" name="q13" value="A" />A. Tâm tâm xã<br />
+          <input type="radio" name="q13" value="B" />B. Hội Việt Nam Cách mạng
+          đồng minh<br />
+          <input type="radio" name="q13" value="C" />C. Hội Liên hiệp thuộc
+          địa<br />
+          <input type="radio" name="q13" value="D" />D. Hội Việt Nam Cách mạng
+          Thanh niên<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 14. Khi chiến tranh Thế giới Thứ hai bùng nổ, thực dân Pháp
+              đã thi hành chính sách gì ở Việt Nam?</strong
+            >
+          </p>
+          <input type="radio" name="q14" value="A" />A. Kinh tế thời chiến<br />
+          <input type="radio" name="q14" value="B" />B. Kinh tế thuộc địa thời
+          chiến<br />
+          <input type="radio" name="q14" value="C" />C. Kinh tế chỉ huy<br />
+          <input type="radio" name="q14" value="D" />D. Kinh tế hàng hoá<br />
+        </div>
+
+        <div class="question">
+          <p>
+            <strong
+              >Câu 15. Nguyễn Ái Quốc về nước trực tiếp lãnh đạo cách mạng Việt
+              Nam vào năm nào?</strong
+            >
+          </p>
+          <input type="radio" name="q15" value="A" />A. 1930<br />
+          <input type="radio" name="q15" value="B" />B. 1935<br />
+          <input type="radio" name="q15" value="C" />C. 1941<br />
+          <input type="radio" name="q15" value="D" />D. 1945<br />
+        </div>
+
+        <button type="button" id="submitBtn" onclick="submitExam()">
+          Nộp bài
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
