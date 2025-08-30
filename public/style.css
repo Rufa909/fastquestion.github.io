@@ -7,7 +7,7 @@
 }
 
 body {
-  background-image: url('/img/QuocKhanh.jpg');
+  background-image: url('/public/img/QuocKhanh.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -147,6 +147,7 @@ button:hover {
     font-weight: bold;
   }
 }
+
 
 
 
