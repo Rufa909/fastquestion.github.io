@@ -7,7 +7,7 @@
 }
 
 body {
-  background-image: url('/img/lich-nghi-le-quoc-khanh-2-9-nguoi-lao-dong.jpg');
+  background-image: url('/img/QuocKhanh.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -147,5 +147,6 @@ button:hover {
     font-weight: bold;
   }
 }
+
 
 
