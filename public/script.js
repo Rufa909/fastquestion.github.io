@@ -27,9 +27,9 @@ const correctAnswers = {
 let isAllowedToStart = false;
 
 // Thời gian cho phép vào làm bài (theo giờ Server)
-const ALLOW_START_HOUR = 0; // x giờ sáng
-const ALLOW_START_MINUTE_START = 0; // từ phút thứ xx của giờ
-const ALLOW_START_MINUTE_END = 59; // đến phút thứ xx của giờ
+// const ALLOW_START_HOUR = 0; // x giờ sáng
+// const ALLOW_START_MINUTE_START = 0; // từ phút thứ xx của giờ
+// const ALLOW_START_MINUTE_END = 59; // đến phút thứ xx của giờ
 
 window.onload = async function () {
   // tam thoi hide
@@ -49,8 +49,8 @@ window.onload = async function () {
     return;
   }
   // Chỉ kiểm tra một lần khi trang load
-  const allow = await checkAllowStartFromServer();
-  console.log("Trạng thái cho phép làm bài: ", allow); // Debug trạng thái
+  // const allow = await checkAllowStartFromServer();
+  // console.log("Trạng thái cho phép làm bài: ", allow); // Debug trạng thái
 
   isAllowedToStart = allow; // Lưu trạng thái giờ để không bị thay đổi
   const startButton = document.getElementById("startBtn");
@@ -121,27 +121,28 @@ async function getServerTime() {
 }
 
 async function checkAllowStartFromServer() {
-  const serverDate = await getServerTime();
-  if (!serverDate) return false; // Nếu không lấy được giờ thì không cho phép
+  return true;
+  // const serverDate = await getServerTime();
+  // if (!serverDate) return false; // Nếu không lấy được giờ thì không cho phép
 
-  const hour = serverDate.getHours();
-  const minute = serverDate.getMinutes();
-  console.log(`Giờ server: ${hour}:${minute}`); // In ra giờ và phút từ server để debug
+  // const hour = serverDate.getHours();
+  // const minute = serverDate.getMinutes();
+  // console.log(`Giờ server: ${hour}:${minute}`); // In ra giờ và phút từ server để debug
 
-  // Kiểm tra giờ server có nằm trong khoảng cho phép hay không
-  if (
-    hour === ALLOW_START_HOUR &&
-    minute >= ALLOW_START_MINUTE_START &&
-    minute <= ALLOW_START_MINUTE_END
-  ) {
-    console.log("Giờ vào làm bài hợp lệ");
-    return true;
-  } else {
-    console.log("Giờ vào làm bài không hợp lệ", hour, minute);
-    document.getElementById("startBtn").innerHTML =
-      "Chưa đến thời gian hoặc đã hết thời gian vào làm bài!";
-    return false;
-  }
+  // // Kiểm tra giờ server có nằm trong khoảng cho phép hay không
+  // if (
+  //   hour === ALLOW_START_HOUR &&
+  //   minute >= ALLOW_START_MINUTE_START &&
+  //   minute <= ALLOW_START_MINUTE_END
+  // ) {
+  //   console.log("Giờ vào làm bài hợp lệ");
+  //   return true;
+  // } else {
+  //   console.log("Giờ vào làm bài không hợp lệ", hour, minute);
+  //   document.getElementById("startBtn").innerHTML =
+  //     "Chưa đến thời gian hoặc đã hết thời gian vào làm bài!";
+  //   return false;
+  // }
 }
 
 function enterFullScreen() {
