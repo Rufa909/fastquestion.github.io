@@ -1,7 +1,8 @@
 let state = {
   name: "",
+  examId: "testtt", // ID bài kiểm tra (thay đổi nếu là bài khác)
   examStarted: false,
-  timeLeft: 300, // 5 phút
+  timeLeft: 10, // 5 phút (bỏ qua nếu không cần)
   correctAnswers: {
     q1: "B",
     q2: "C",
@@ -15,6 +16,19 @@ let state = {
     q10: "A"
   },
   userAnswers: {}
+};
+
+// Khi trang load, kiểm tra nếu bài này đã làm rồi
+window.onload = function () {
+  if (localStorage.getItem(state.examId) === "submitted") {
+    document.body.innerHTML = `
+      <div style="text-align:center; padding: 20px;">
+        <h2>Bạn đã hoàn thành bài kiểm tra này!</h2>
+        <a href="xemlaidiem.html">Xem lại điểm</a>
+      </div>
+    `;
+    return;
+  }
 };
 
 // Kiểm tra có phải mobile
@@ -40,8 +54,14 @@ async function startExam() {
     return;
   }
 
+  // Kiểm tra nếu đã làm bài
+  if (localStorage.getItem(state.examId) === "submitted") {
+    alert("Bạn đã làm bài kiểm tra này rồi!");
+    return;
+  }
+
   if (isMobile()) {
-    // Trên mobile: chỉ cần xoay ngang
+    // Trên mobile: phải xoay ngang
     if (window.innerWidth < window.innerHeight) {
       alert("Vui lòng xoay ngang màn hình để tiếp tục.");
       return;
@@ -107,6 +127,8 @@ function showResult(correctCount) {
 
 // Nộp bài
 async function submitExam() {
+  if (!state.examStarted) return;
+
   state.examStarted = false;
 
   const userAnswers = getUserAnswers();
@@ -126,7 +148,6 @@ async function submitExam() {
   };
 
   try {
-    // Gửi dữ liệu lên server để lưu vào thư mục users
     await fetch("/save-result", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -134,15 +155,16 @@ async function submitExam() {
     });
   } catch (error) {
     console.error("Lỗi khi lưu dữ liệu:", error);
-    alert("Không thể lưu kết quả lên server. Kiểm tra kết nối.");
   }
+
+  // Đánh dấu đã làm bài trong localStorage
+  localStorage.setItem(state.examId, "submitted");
 
   // Ẩn màn hình làm bài, hiện kết quả
   document.getElementById("examScreen").style.display = "none";
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("resultScreen").style.display = "block";
 }
-
 
 // Nếu thoát fullscreen (PC) hoặc rời tab thì tự động nộp bài
 document.addEventListener("fullscreenchange", () => {
@@ -162,17 +184,17 @@ window.addEventListener("blur", () => {
 window.addEventListener("beforeunload", (event) => {
   if (state.examStarted) {
     submitExam();
-    event.preventDefault();  // Ngăn việc chuyển trang
+    event.preventDefault();
   }
 });
 
-// Xử lý nộp bài khi người dùng bấm nút "Nộp bài"
+// Nộp bài khi bấm nút
 document.getElementById("submitBtn").addEventListener("click", submitExam);
 
 function restartExam() {
-  location.reload(); // Làm mới trang để bắt đầu lại từ đầu
+  location.reload();
 }
 
 function showAllResults() {
-  window.location.href = "xemlaidiem.html"; 
+  window.location.href = "xemlaidiem.html";
 }
