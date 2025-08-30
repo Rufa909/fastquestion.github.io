@@ -35,26 +35,26 @@ window.onload = async function () {
   // tam thoi hide
   //document.getElementById("boxBtnStart").style.display = "none";
 
-  if (localStorage.getItem(examSubmitted) === "true") {
-    document.body.innerHTML = `<form id="outputForm">
-        <div class="form-control">
-            <label for="title"><h1>Bài Trắc Nghiệm</h1></label>
-            <label type="text">Bạn đã hoàn thành bài kiểm tra. Không thể làm lại.</label>
-        </div>
-        <div class="back">
-          <a href="dsketqua.html" style="color: black; cursor: pointer;"">Danh sách</a>
-        </div>
+  // if (localStorage.getItem(examSubmitted) === "true") {
+  //   document.body.innerHTML = `<form id="outputForm">
+  //       <div class="form-control">
+  //           <label for="title"><h1>Bài Trắc Nghiệm</h1></label>
+  //           <label type="text">Bạn đã hoàn thành bài kiểm tra. Không thể làm lại.</label>
+  //       </div>
+  //       <div class="back">
+  //         <a href="dsketqua.html" style="color: black; cursor: pointer;"">Danh sách</a>
+  //       </div>
         
-    </form>`;
-    return;
-  }
+  //   </form>`;
+  //   return;
+  // }
   // Chỉ kiểm tra một lần khi trang load
   // const allow = await checkAllowStartFromServer();
   // console.log("Trạng thái cho phép làm bài: ", allow); // Debug trạng thái
 
   isAllowedToStart = allow; // Lưu trạng thái giờ để không bị thay đổi
   const startButton = document.getElementById("startBtn");
-  startButton.disabled = !allow; // Enable/Disable nút Start dựa vào giờ server
+  // startButton.disabled = !allow; // Enable/Disable nút Start dựa vào giờ server
 
   await loadUsers();
 };
@@ -64,10 +64,10 @@ function isIOS() {
 }
 
 async function handleStartExam() {
-  if (!isAllowedToStart) {
-    alert("Đã hết giờ cho phép làm bài!");
-    return;
-  }
+  // if (!isAllowedToStart) {
+  //   alert("Đã hết giờ cho phép làm bài!");
+  //   return;
+  // }
 
   const userInput = document.getElementById("hovaten");
   const username = userInput.value.trim();
@@ -103,10 +103,10 @@ async function handleStartExam() {
 
 async function getServerTime() {
   try {
-    const response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh"); // API Server trả giờ thực
+    const response = await fetch("https://demotestexam.glitch.me/api/time"); // API Server trả giờ thực
     const data = await response.json();
-    console.log("Thời gian server: ", data.currentTime); // In ra thời gian từ server
-    const serverDate = new Date(data.currentTime);
+    console.log("Thời gian server: ", data.datetime); // In ra thời gian từ server
+    const serverDate = new Date(data.datetime);
 
     // Chuyển đổi sang múi giờ Việt Nam nếu cần
     const vietnamTime = new Date(
@@ -121,28 +121,27 @@ async function getServerTime() {
 }
 
 async function checkAllowStartFromServer() {
-  return true;
-  // const serverDate = await getServerTime();
-  // if (!serverDate) return false; // Nếu không lấy được giờ thì không cho phép
+  const serverDate = await getServerTime();
+  if (!serverDate) return false; // Nếu không lấy được giờ thì không cho phép
 
-  // const hour = serverDate.getHours();
-  // const minute = serverDate.getMinutes();
-  // console.log(`Giờ server: ${hour}:${minute}`); // In ra giờ và phút từ server để debug
+  const hour = serverDate.getHours();
+  const minute = serverDate.getMinutes();
+  console.log(`Giờ server: ${hour}:${minute}`); // In ra giờ và phút từ server để debug
 
-  // // Kiểm tra giờ server có nằm trong khoảng cho phép hay không
-  // if (
-  //   hour === ALLOW_START_HOUR &&
-  //   minute >= ALLOW_START_MINUTE_START &&
-  //   minute <= ALLOW_START_MINUTE_END
-  // ) {
-  //   console.log("Giờ vào làm bài hợp lệ");
-  //   return true;
-  // } else {
-  //   console.log("Giờ vào làm bài không hợp lệ", hour, minute);
-  //   document.getElementById("startBtn").innerHTML =
-  //     "Chưa đến thời gian hoặc đã hết thời gian vào làm bài!";
-  //   return false;
-  // }
+  // Kiểm tra giờ server có nằm trong khoảng cho phép hay không
+  if (
+    hour === ALLOW_START_HOUR &&
+    minute >= ALLOW_START_MINUTE_START &&
+    minute <= ALLOW_START_MINUTE_END
+  ) {
+    console.log("Giờ vào làm bài hợp lệ");
+    return true;
+  } else {
+    console.log("Giờ vào làm bài không hợp lệ", hour, minute);
+    document.getElementById("startBtn").innerHTML =
+      "Chưa đến thời gian hoặc đã hết thời gian vào làm bài!";
+    return false;
+  }
 }
 
 function enterFullScreen() {
