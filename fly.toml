@@ -3,10 +3,12 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'quickquiz'
+app = 'fquestions'
 primary_region = 'sin'
 
 [build]
+  dockerfile = "Dockerfile"
+  builder = "heroku/buildpacks:20"
 
 [http_service]
   internal_port = 3000
