@@ -1,8 +1,8 @@
 let state = {
   name: "",
-  examId: "testt11", // ID bài kiểm tra (thay đổi nếu là bài khác)
+  examId: "testt2", // ID bài kiểm tra (thay đổi nếu là bài khác)
   examStarted: false,
-  timeLeft: 10, // 5 phút (bỏ qua nếu không cần)
+  timeLeft: 360, // 5 phút (bỏ qua nếu không cần)
   correctAnswers: {
     q1: "B",
     q2: "C",
@@ -22,9 +22,20 @@ let state = {
 window.onload = function () {
   if (localStorage.getItem(state.examId) === "submitted") {
     document.body.innerHTML = `
-      <div style="text-align:center; padding: 20px;">
-        <h2>Bạn đã hoàn thành bài kiểm tra này!</h2>
+      <img src="/public/img/QuocKhanh.jpg" alt="background" style="position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;">
+      <div id="startScreen">
+        <h2>Bạn đã hoàn thành bài quick quizz này rồi! <br> Chúc bạn có ngày 2/9 thật vui vẻ ^^!</h2>
         <a href="xemlaidiem.html">Xem lại điểm</a>
+      </div>
+      <div style="text-align:center; padding: 20px;">
+        
+        
       </div>
     `;
     return;
@@ -117,7 +128,7 @@ function gradeExam(userAnswers) {
 
 function showResult(correctCount) {
   const totalQuestions = Object.keys(state.correctAnswers).length;
-  const resultMessage = `${state.name}, bạn đã trả lời đúng ${correctCount}/${totalQuestions} câu!`;
+  const resultMessage = `Chúc mừng ${state.name}, bạn đã trả lời đúng ${correctCount}/${totalQuestions} câu!`;
 
   // Hiển thị kết quả
   document.getElementById("resultMessage").innerText = resultMessage;
@@ -190,10 +201,6 @@ window.addEventListener("beforeunload", (event) => {
 
 // Nộp bài khi bấm nút
 document.getElementById("submitBtn").addEventListener("click", submitExam);
-
-function restartExam() {
-  location.reload();
-}
 
 function showAllResults() {
   window.location.href = "xemlaidiem.html";

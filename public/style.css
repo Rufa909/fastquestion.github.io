@@ -7,7 +7,6 @@
 }
 
 body {
-  background-image: url('/public/img/QuocKhanh.jpg');
   background-size: cover;
   background-position: center;
   display: flex;

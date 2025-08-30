@@ -7,27 +7,33 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <img src="/public/img/QuocKhanh.jpg" alt="background" style="position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;">
     <!-- Màn hình bắt đầu -->
     <div id="startScreen">
       <h2>QUICK QUIZZ</h2>
-      <input type="text" id="nameInput" placeholder="Nhập tên..." />
+      <p>CHÀO MỪNG NGƯỜI CÔNG DÂN YÊU NƯỚC! <BR>HÃY ĐIỀN THÔNG TIN BÊN DƯỚI VÀ HOÀN THÀNH CÁC CÂU HỎI NHỎ NHÉ!</p>
+      <input type="text" id="nameInput" placeholder="Nhập tên vào đây" />
       <button onclick="startExam()">Bắt đầu</button>
     </div>
 
     <!-- Màn hình kết quả (sẽ hiển thị sau khi nộp bài) -->
     <div id="resultScreen" style="display: none">
-      <h3>Kết quả bài thi</h3>
+      <h3>Kết quả</h3>
       <p id="resultMessage"></p>
       <!-- Thêm phần tử này để hiển thị kết quả -->
        <div id="allResults"></div>
         <button onclick="showAllResults()">Xem tất cả kết quả</button>
-
-      <button onclick="restartExam()">Làm lại bài</button>
     </div>
 
     <!-- Màn hình làm bài -->
     <div id="examScreen" style="display: none">
-      <h2>Bài thi trắc nghiệm</h2>
+      <h2>Quick quizz</h2>
       <p id="timer">Thời gian: 00:00</p>
       <form id="examForm">
         <div class="questions">
