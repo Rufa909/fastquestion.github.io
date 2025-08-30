@@ -103,7 +103,7 @@ async function handleStartExam() {
 
 async function getServerTime() {
   try {
-    const response = await fetch("https://demotestexam.glitch.me/api/time"); // API Server trả giờ thực
+    const response = await fetch("https://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh"); // API Server trả giờ thực
     const data = await response.json();
     console.log("Thời gian server: ", data.currentTime); // In ra thời gian từ server
     const serverDate = new Date(data.currentTime);
