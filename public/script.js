@@ -1,6 +1,6 @@
 let state = {
   name: "",
-  examId: "testtt", // ID bài kiểm tra (thay đổi nếu là bài khác)
+  examId: "testt11", // ID bài kiểm tra (thay đổi nếu là bài khác)
   examStarted: false,
   timeLeft: 10, // 5 phút (bỏ qua nếu không cần)
   correctAnswers: {
