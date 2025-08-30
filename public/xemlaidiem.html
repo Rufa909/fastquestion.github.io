@@ -2,16 +2,25 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Danh sách kết quả</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
+    body { font-family: Arial, sans-serif; margin: 20px;  }
     table { border-collapse: collapse; width: 100%; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
     th { background: #f2f2f2; }
+    .error { color: red; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h2>Danh sách kết quả</h2>
+  <img src="/public/img/QuocKhanh.jpg" alt="background" style="position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Giúp ảnh không bị méo */
+  z-index: -1; filter: blur(8px);">
+  <h2 style="color: black; background-color: white; display: inline-block; border-radius: 15px; padding: 10px 5px;">Danh sách kết quả</h2>
   <table id="resultsTable">
     <thead>
       <tr>
@@ -19,25 +28,33 @@
         <th>Điểm</th>
         <th>Số câu</th>
         <th>Ngày nộp</th>
-        <th>Xem chi tiết</th>
+        <!-- <th>Xem chi tiết</th> -->
       </tr>
     </thead>
     <tbody></tbody>
   </table>
 
   <script>
-    fetch("/users")
-      .then(res => res.json())
-      .then(users => {
+    async function loadResults() {
+      try {
+        const res = await fetch("/users");
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status} - ${res.statusText}`);
+        }
+
+        const users = await res.json();
         const tbody = document.querySelector("#resultsTable tbody");
         tbody.innerHTML = "";
+
+        const correctAnswers = {
+          q1:"B", q2:"C", q3:"C", q4:"A", q5:"D",
+          q6:"B", q7:"D", q8:"B", q9:"C", q10:"A"
+        };
+
         users.forEach(user => {
           const totalQ = Object.keys(user.answers || {}).length;
           const score = Object.entries(user.answers || {}).filter(
-            ([q, ans]) => {
-              const correctAnswers = { q1:"B", q2:"C", q3:"C", q4:"A", q5:"D", q6:"B", q7:"D", q8:"B", q9:"C", q10:"A" };
-              return ans === correctAnswers[q];
-            }
+            ([q, ans]) => ans === correctAnswers[q]
           ).length;
 
           const tr = document.createElement("tr");
@@ -46,14 +63,21 @@
             <td>${score}</td>
             <td>${totalQ}</td>
             <td>${new Date(user.submittedAt).toLocaleString()}</td>
-            <td><a href="xemdiem.html?username=${user.username}">Xem</a></td>
+            
           `;
+          //<td><a href="xemdiem.html?username=${encodeURIComponent(user.username)}">Xem</a></td>
           tbody.appendChild(tr);
         });
-      })
-      .catch(err => {
-        document.body.innerHTML = `<p>Lỗi tải dữ liệu: ${err}</p>`;
-      });
+
+        if (users.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5">Chưa có dữ liệu</td></tr>`;
+        }
+      } catch (err) {
+        document.body.innerHTML += `<p class="error">Lỗi tải dữ liệu: ${err.message}</p>`;
+      }
+    }
+
+    loadResults();
   </script>
 </body>
 </html>
