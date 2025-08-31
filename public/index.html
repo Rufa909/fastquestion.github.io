@@ -8,18 +8,16 @@
   </head>
   <body>
     <img src="/public/img/QuocKhanh.jpg" class="bg-image">
-    <!-- Màn hình bắt đầu -->
     <div id="startScreen">
-      <h2>QUICK QUIZZ</h2>
-      <p>CHÀO MỪNG NGƯỜI CÔNG DÂN YÊU NƯỚC! <BR>HÃY ĐIỀN THÔNG TIN BÊN DƯỚI VÀ HOÀN THÀNH CÁC CÂU HỎI NHỎ NHÉ!</p>
+      <h2 style="padding: 10px;">QUICK QUIZZ</h2>
+      <p style="padding: 10px;">CHÀO MỪNG NGƯỜI CÔNG DÂN YÊU NƯỚC! <BR>HÃY ĐIỀN THÔNG TIN BÊN DƯỚI VÀ HOÀN THÀNH CÁC CÂU HỎI NHỎ NHÉ!</p>
       <input type="text" id="nameInput" placeholder="Nhập tên vào đây" />
       <button onclick="startExam()">Bắt đầu</button>
     </div>
 
-    <!-- Màn hình kết quả (sẽ hiển thị sau khi nộp bài) -->
     <div id="resultScreen" style="display: none">
-      <h3>Kết quả</h3>
-      <p id="resultMessage"></p>
+      <h3 style="padding: 10px;">Kết quả</h3>
+      <p id="resultMessage" style="padding: 10px;"></p>
       <!-- Thêm phần tử này để hiển thị kết quả -->
        <div id="allResults"></div>
         <button onclick="showAllResults()">Xem tất cả kết quả</button>

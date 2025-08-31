@@ -1,8 +1,8 @@
 let state = {
   name: "",
-  examId: "testt2", // ID bài kiểm tra (thay đổi nếu là bài khác)
+  examId: "exam0209", // ID bài kiểm tra
   examStarted: false,
-  timeLeft: 300, // 5 phút
+  timeLeft: 300,
   correctAnswers: {
     q1: "B",
     q2: "C",
@@ -18,7 +18,6 @@ let state = {
   userAnswers: {}
 };
 
-// Khi trang load, kiểm tra nếu bài này đã làm rồi
 window.onload = function () {
   if (localStorage.getItem(state.examId) === "submitted") {
     document.body.innerHTML = `
