@@ -2,7 +2,7 @@ let state = {
   name: "",
   examId: "testt2", // ID bài kiểm tra (thay đổi nếu là bài khác)
   examStarted: false,
-  timeLeft: 360, // 5 phút (bỏ qua nếu không cần)
+  timeLeft: 300, // 5 phút
   correctAnswers: {
     q1: "B",
     q2: "C",
@@ -22,7 +22,7 @@ let state = {
 window.onload = function () {
   if (localStorage.getItem(state.examId) === "submitted") {
     document.body.innerHTML = `
-      <img src="/public/img/QuocKhanh.jpg" alt="background" style="position: fixed;
+      <img src="/public/img/QuocKhanh.jpg" style="position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -205,3 +205,4 @@ document.getElementById("submitBtn").addEventListener("click", submitExam);
 function showAllResults() {
   window.location.href = "xemlaidiem.html";
 }
+
