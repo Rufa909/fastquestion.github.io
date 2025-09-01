@@ -1,129 +1,119 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách kết quả</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .bg-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      filter: blur(8px) brightness(0.7);
-    }
-    h2 {
-      color: black;
-      background-color: white;
-      display: inline-block;
-      border-radius: 15px;
-      padding: 10px 20px;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background: #f2f2f2;
-    }
-    .error {
-      color: red;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <!-- Ảnh nền -->
-  <img src="img/QuocKhanh.jpg" alt="background" class="bg-image">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách kết quả</title>
+    <style>
+      body {
+        font-size: 1.6rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to bottom, #f3f7ec, #c76a6a);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background: #f2f2f2;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên</th>
+          <th>Điểm</th>
+          <th>Số câu</th>
+          <th>Ngày nộp</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-  <h2>Danh sách kết quả</h2>
-  <table id="resultsTable">
-    <thead>
-      <tr>
-        <th>STT</th>
-        <th>Tên</th>
-        <th>Điểm</th>
-        <th>Số câu</th>
-        <th>Ngày nộp</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+    <script>
+      async function loadResults() {
+        try {
+          const res = await fetch("/users?_=" + Date.now(), {
+            cache: "no-store",
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-  <script>
-    async function loadResults() {
-      try {
-        const res = await fetch("/users?_=" + Date.now(), { cache: "no-store" });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          let users = await res.json();
+          const tbody = document.querySelector("#resultsTable tbody");
+          tbody.innerHTML = "";
 
-        let users = await res.json();
-        const tbody = document.querySelector("#resultsTable tbody");
-        tbody.innerHTML = "";
+          if (!Array.isArray(users) || users.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5">Chưa có dữ liệu</td></tr>`;
+            return;
+          }
 
-        if (!Array.isArray(users) || users.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="5">Chưa có dữ liệu</td></tr>`;
-          return;
-        }
+          const correctAnswers = {
+            1: "Chủ tịch Hồ Chí Minh",
+            2: "Võ Nguyên Giáp",
+            3: "Trường Chinh",
+            4: "Mặt trận Tổ quốc Việt Nam",
+            5: "Nguyễn Văn Cừ",
+            6: "Tố Hữu",
+            7: "Bùi Bằng Đoàn",
+            8: "Huỳnh Thúc Kháng",
+            9: "Nguyễn Văn Trỗi",
+            10: "Hoàng Quốc Việt",
+          };
 
-        // ✅ Đáp án đúng
-        const correctAnswers = {
-          q1:"B", q2:"C", q3:"C", q4:"A", q5:"D",
-          q6:"B", q7:"D", q8:"B", q9:"C", q10:"A"
-        };
+          // ✅ Tính điểm đúng
+          users.forEach((user) => {
+            const score = Object.entries(user.answers || {}).filter(
+              ([qid, ans]) => ans === correctAnswers[qid]
+            ).length;
+            user.score = score;
+            user.totalQ = Object.keys(user.answers || {}).length;
+          });
 
-        // ✅ Tính điểm cho từng user
-        users.forEach(user => {
-          const score = Object.entries(user.answers || {}).filter(
-            ([q, ans]) => ans === correctAnswers[q]
-          ).length;
-          user.score = score;
-          user.totalQ = Object.keys(user.answers || {}).length;
-        });
+          // ✅ Sắp xếp điểm từ cao xuống thấp
+          users.sort((a, b) => b.score - a.score);
 
-        // ✅ Sắp xếp điểm từ cao xuống thấp
-        users.sort((a, b) => b.score - a.score);
-
-        // ✅ Render bảng với STT
-        users.forEach((user, index) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
+          // ✅ Render bảng với STT
+          users.forEach((user, index) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
             <td>${index + 1}</td>
             <td>${user.username}</td>
             <td>${user.score}</td>
             <td>${user.totalQ}</td>
             <td>${new Date(user.submittedAt).toLocaleString()}</td>
           `;
-          tbody.appendChild(tr);
-        });
-
-      } catch (err) {
-        const tbody = document.querySelector("#resultsTable tbody");
-        tbody.innerHTML = `<tr><td colspan="5" class="error">Lỗi tải dữ liệu: ${err.message}</td></tr>`;
+            tbody.appendChild(tr);
+          });
+        } catch (err) {
+          const tbody = document.querySelector("#resultsTable tbody");
+          tbody.innerHTML = `<tr><td colspan="5" class="error">Lỗi tải dữ liệu: ${err.message}</td></tr>`;
+        }
       }
-    }
 
-    // ✅ Tải dữ liệu lần đầu
-    loadResults();
+      // ✅ Tải dữ liệu lần đầu
+      loadResults();
 
-    // ✅ Tự động làm mới mỗi 5 giây
-    setInterval(loadResults, 5000);
-  </script>
-</body>
+      // ✅ Tự động làm mới mỗi 5 giây
+      setInterval(loadResults, 5000);
+    </script>
+  </body>
 </html>

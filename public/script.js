@@ -1,25 +1,158 @@
+let currentQuestionIndex = 0;
 let state = {
   name: "",
   examId: "exam0209", // ID bài kiểm tra
   examStarted: false,
   timeLeft: 300,
-  correctAnswers: {
-    q1: "B",
-    q2: "C",
-    q3: "C",
-    q4: "A",
-    q5: "D",
-    q6: "B",
-    q7: "D",
-    q8: "B",
-    q9: "C",
-    q10: "A"
-  },
-  userAnswers: {}
+  questions: [
+    {
+      quiz_id: 1,
+      question:
+        "Ai là người đọc bản Tuyên ngôn Độc lập ngày 2/9/1945 tại Quảng trường Ba Đình?",
+      answers: [
+        "Trường Chinh",
+        "Chủ tịch Hồ Chí Minh",
+        "Võ Nguyên Giáp",
+        "Phạm Văn Đồng",
+      ],
+    },
+    {
+      quiz_id: 2,
+      question:
+        "Vị tướng nào được xem là “Tổng tư lệnh đầu tiên” của Quân đội nhân dân Việt Nam?",
+      answers: [
+        "Lê Trọng Tấn",
+        "Võ Nguyên Giáp",
+        "Nguyễn Huệ",
+        "Trần Hưng Đạo",
+      ],
+    },
+    {
+      quiz_id: 3,
+      question:
+        "Ai là người viết bản Tuyên ngôn Độc lập cùng Chủ tịch Hồ Chí Minh?",
+      answers: [
+        "Trường Chinh",
+        "Chủ tịch Hồ Chí Minh",
+        "Võ Nguyên Giáp",
+        "Phạm Văn Đồng",
+      ],
+    },
+    {
+      quiz_id: 4,
+      question:
+        "Tổ chức nào được thành lập vào tháng 5/1941, đóng vai trò lãnh đạo Cách mạng Tháng Tám?",
+      answers: [
+        "Đảng Cộng sản Việt Nam",
+        "Mặt trận Tổ quốc Việt Nam",
+        "Quân đội nhân dân Việt Nam",
+        "Hội Liên hiệp Phụ nữ Việt Nam",
+      ],
+    },
+    {
+      quiz_id: 5,
+      question:
+        "Nhân vật nào từng là Tổng Bí thư Đảng Cộng sản Đông Dương trước Cách mạng Tháng Tám?",
+      answers: [
+        "Trường Chinh",
+        "Chủ tịch Hồ Chí Minh",
+        "Nguyễn Văn Linh",
+        "Nguyễn Văn Cừ",
+      ],
+    },
+    {
+      quiz_id: 6,
+      question:
+        "Ai là người phụ trách công tác tuyên truyền trong thời kỳ tiền khởi nghĩa?",
+      answers: ["Trần Phú", "Tố Hữu", "Nguyễn Lương Bằng", "Phạm Văn Đồng"],
+    },
+    {
+      quiz_id: 7,
+      question:
+        "Nhân vật nào từng giữ chức Chủ tịch Quốc hội đầu tiên của nước Việt Nam Dân chủ Cộng hòa?",
+      answers: [
+        "Nguyễn Văn Tố",
+        "Trường Chinh",
+        "Tôn Đức Thắng",
+        "Bùi Bằng Đoàn",
+      ],
+    },
+    {
+      quiz_id: 8,
+      question:
+        "Nhân vật nào từng giữ chức Bộ trưởng Bộ Nội vụ trong Chính phủ lâm thời năm 1945?",
+      answers: [
+        "Trần Huy Liệu",
+        "Huỳnh Thúc Kháng",
+        "Phan Kế Toại",
+        "Nguyễn Văn Tố",
+      ],
+    },
+    {
+      quiz_id: 9,
+      question:
+        "Nhà cách mạng nào từng bị thực dân Pháp xử tử tại Hóc Môn, được xem là biểu tượng của tinh thần bất khuất Nam Bộ?",
+      answers: ["Võ Thị Sáu", "Lê Văn Tám", "Nguyễn Văn Trỗi", "Trần Văn Ơn"],
+    },
+    {
+      quiz_id: 10,
+      question:
+        "Nhân vật nào được giao nhiệm vụ tiếp quản Hà Nội sau Cách mạng Tháng Tám?",
+      answers: [
+        "Vũ Đình Huỳnh",
+        "Phạm Ngọc Thạch",
+        "Hoàng Quốc Việt",
+        "Nguyễn Văn Trân",
+      ],
+    },
+  ],
+  results: [
+    {
+      quiz_id: 1,
+      answer: "Chủ tịch Hồ Chí Minh",
+    },
+    {
+      quiz_id: 2,
+      answer: "Võ Nguyên Giáp",
+    },
+    {
+      quiz_id: 3,
+      answer: "Trường Chinh",
+    },
+    {
+      quiz_id: 4,
+      answer: "Mặt trận Tổ quốc Việt Nam",
+    },
+    {
+      quiz_id: 5,
+      answer: "Nguyễn Văn Cừ",
+    },
+    {
+      quiz_id: 6,
+      answer: "Tố Hữu",
+    },
+    {
+      quiz_id: 7,
+      answer: "Bùi Bằng Đoàn",
+    },
+    {
+      quiz_id: 8,
+      answer: "Huỳnh Thúc Kháng",
+    },
+    {
+      quiz_id: 9,
+      answer: "Nguyễn Văn Trỗi",
+    },
+    {
+      quiz_id: 10,
+      answer: "Hoàng Quốc Việt",
+    },
+  ],
+  userAnswers: {},
 };
 
 window.onload = function () {
-  if (localStorage.getItem(state.examId) === "submitted") {
+  if (localStorage.getItem(state.examId) === "submitte") {
     document.body.innerHTML = `
       <img src="/public/img/QuocKhanh.jpg" style="position: fixed;
       top: 0;
@@ -39,6 +172,7 @@ window.onload = function () {
     `;
     return;
   }
+  document.getElementById("bg-QK").style.display = "none";
 };
 
 // Kiểm tra có phải mobile
@@ -64,11 +198,11 @@ async function startExam() {
     return;
   }
 
-  // Kiểm tra nếu đã làm bài
-  if (localStorage.getItem(state.examId) === "submitted") {
-    alert("Bạn đã làm bài kiểm tra này rồi!");
-    return;
-  }
+  // // Kiểm tra nếu đã làm bài
+  // if (localStorage.getItem(state.examId) === "submitted") {
+  //   alert("Bạn đã làm bài kiểm tra này rồi!");
+  //   return;
+  // }
 
   if (isMobile()) {
     // Trên mobile: phải xoay ngang
@@ -82,10 +216,12 @@ async function startExam() {
   }
 
   // Hiển thị màn hình làm bài
+  document.getElementById("bg-QK").style.display = "block";
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("examScreen").style.display = "block";
   state.examStarted = true;
   startTimer();
+  renderCurrentQuestion();
 }
 
 // Đếm ngược thời gian
@@ -99,34 +235,83 @@ function startTimer() {
     }
     const minutes = Math.floor(state.timeLeft / 60);
     const seconds = state.timeLeft % 60;
-    timerEl.textContent = `Thời gian: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    timerEl.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
     state.timeLeft--;
   }, 1000);
 }
 
 function getUserAnswers() {
-  const userAnswers = {};
-  for (let question in state.correctAnswers) {
-    const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
-    if (selectedOption) {
-      userAnswers[question] = selectedOption.value;
-    }
-  }
-  return userAnswers;
+  return { ...state.userAnswers }; // clone để tránh tham chiếu trực tiếp
 }
 
+
 function gradeExam(userAnswers) {
-  let correctCount = 0;
-  for (let question in state.correctAnswers) {
-    if (userAnswers[question] === state.correctAnswers[question]) {
-      correctCount++;
-    }
+  return state.results.reduce((count, res) => {
+    return count + (userAnswers[res.quiz_id] === res.answer ? 1 : 0);
+  }, 0);
+}
+
+
+
+function renderCurrentQuestion() {
+  const container = document.getElementById("questions");
+  const q = state.questions[currentQuestionIndex];
+  const selectedAnswer = state.userAnswers[q.quiz_id];
+
+  container.innerHTML = `
+    <div class="quiz_question">
+      <p><b>Câu ${currentQuestionIndex + 1}:</b> ${q.question}</p>
+      <ul>
+        ${q.answers
+          .map(
+            (ans, idx) => `
+          <li class="answer-item ${
+            selectedAnswer === ans ? "selected" : ""
+          }" data-answer="${ans}">
+            <span>${String.fromCharCode(65 + idx)}.</span>
+            <span class="quiz_answer_item">${ans}</span>
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+    </div>
+  `;
+
+  // Gắn sự kiện click cho các <li>
+  const liElements = container.querySelectorAll(".answer-item");
+  liElements.forEach((li) => {
+    li.addEventListener("click", () => {
+      const answer = li.getAttribute("data-answer");
+      state.userAnswers[q.quiz_id] = answer;
+
+      // Xóa class selected cũ và thêm mới
+      liElements.forEach((el) => el.classList.remove("selected"));
+      li.classList.add("selected");
+    });
+  });
+
+  // Gắn sự kiện Prev / Next
+  document.getElementById("quiz_prev")?.addEventListener("click", prevQuestion);
+  document.getElementById("quiz_next")?.addEventListener("click", nextQuestion);
+}
+
+function prevQuestion() {
+  if (currentQuestionIndex > 0) {
+    currentQuestionIndex--;
+    renderCurrentQuestion();
   }
-  return correctCount;
+}
+
+function nextQuestion() {
+  if (currentQuestionIndex < state.questions.length - 1) {
+    currentQuestionIndex++;
+    renderCurrentQuestion();
+  }
 }
 
 function showResult(correctCount) {
-  const totalQuestions = Object.keys(state.correctAnswers).length;
+  const totalQuestions = state.results.length;
   const resultMessage = `Chúc mừng ${state.name}, bạn đã trả lời đúng ${correctCount}/${totalQuestions} câu!`;
 
   // Hiển thị kết quả
@@ -151,17 +336,17 @@ async function submitExam() {
   const newResult = {
     username: state.name,
     score: correctCount,
-    totalQuestions: Object.keys(state.correctAnswers).length,
+    totalQuestions: state.results.length,
     answers: userAnswers,
     startedAt: new Date().toISOString(),
-    submittedAt: new Date().toISOString()
+    submittedAt: new Date().toISOString(),
   };
 
   try {
     await fetch("/save-result", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newResult)
+      body: JSON.stringify(newResult),
     });
   } catch (error) {
     console.error("Lỗi khi lưu dữ liệu:", error);
@@ -193,10 +378,24 @@ window.addEventListener("blur", () => {
 // Cảnh báo hoặc tự động nộp bài khi người dùng cố gắng thoát trang
 window.addEventListener("beforeunload", (event) => {
   if (state.examStarted) {
-    submitExam();
-    event.preventDefault();
+    state.examStarted = false;
+    const userAnswers = getUserAnswers();
+    const correctCount = gradeExam(userAnswers);
+
+    const payload = {
+      username: state.name,
+      score: correctCount,
+      totalQuestions: state.results.length,
+      answers: userAnswers,
+      startedAt: new Date().toISOString(),
+      submittedAt: new Date().toISOString(),
+    };
+
+    // Dùng sendBeacon để gửi dữ liệu trước khi thoát
+    navigator.sendBeacon("/save-result", JSON.stringify(payload));
   }
 });
+
 
 // Nộp bài khi bấm nút
 document.getElementById("submitBtn").addEventListener("click", submitExam);
@@ -204,4 +403,3 @@ document.getElementById("submitBtn").addEventListener("click", submitExam);
 function showAllResults() {
   window.location.href = "xemlaidiem.html";
 }
-
