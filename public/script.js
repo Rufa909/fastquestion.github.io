@@ -1,7 +1,7 @@
 let currentQuestionIndex = 0;
 let state = {
   name: "",
-  examId: "lasttest", // ID bài kiểm tra
+  examId: "Exam0209", // ID bài kiểm tra
   examStarted: false,
   timeLeft: 300,
   questions: [
@@ -44,7 +44,7 @@ let state = {
         "Tổ chức nào được thành lập vào tháng 5/1941, đóng vai trò lãnh đạo Cách mạng Tháng Tám?",
       answers: [
         "Đảng Cộng sản Việt Nam",
-        "Mặt trận Tổ quốc Việt Nam",
+        "Mặt trận Việt Minh",
         "Quân đội nhân dân Việt Nam",
         "Hội Liên hiệp Phụ nữ Việt Nam",
       ],
@@ -121,7 +121,7 @@ let state = {
     },
     {
       quiz_id: 4,
-      answer: "Mặt trận Tổ quốc Việt Nam",
+      answer: "Mặt trận Việt Minh",
     },
     {
       quiz_id: 5,
@@ -145,7 +145,7 @@ let state = {
     },
     {
       quiz_id: 10,
-      answer: "Hoàng Quốc Việt",
+      answer: "Vũ Đình Huỳnh",
     },
   ],
   userAnswers: {},
