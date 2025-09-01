@@ -1,7 +1,7 @@
 let currentQuestionIndex = 0;
 let state = {
   name: "",
-  examId: "exam0209", // ID bài kiểm tra
+  examId: "lasttest", // ID bài kiểm tra
   examStarted: false,
   timeLeft: 300,
   questions: [
@@ -152,7 +152,7 @@ let state = {
 };
 
 window.onload = function () {
-  if (localStorage.getItem(state.examId) === "submitte") {
+  if (localStorage.getItem(state.examId) === "submitted") {
     document.body.innerHTML = `
       <img src="/public/img/QuocKhanh.jpg" style="position: fixed;
       top: 0;
@@ -198,11 +198,11 @@ async function startExam() {
     return;
   }
 
-  // // Kiểm tra nếu đã làm bài
-  // if (localStorage.getItem(state.examId) === "submitted") {
-  //   alert("Bạn đã làm bài kiểm tra này rồi!");
-  //   return;
-  // }
+  // Kiểm tra nếu đã làm bài
+  if (localStorage.getItem(state.examId) === "submitted") {
+    alert("Bạn đã làm bài kiểm tra này rồi!");
+    return;
+  }
 
   if (isMobile()) {
     // Trên mobile: phải xoay ngang
