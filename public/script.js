@@ -153,21 +153,12 @@ let state = {
 
 window.onload = function () {
   if (localStorage.getItem(state.examId) === "submitted") {
+    document.getElementById("bg-QK").style.display = "block";
     document.body.innerHTML = `
-      <img src="/public/img/QuocKhanh.jpg" style="position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;">
-      <div id="startScreen">
-        <h2>Bạn đã hoàn thành bài quick quizz này rồi! <br> Chúc bạn có ngày 2/9 thật vui vẻ ^^!</h2>
-        <a href="xemlaidiem.html">Xem lại điểm</a>
-      </div>
-      <div style="text-align:center; padding: 20px;">
-        
-        
+      <div id="startScreen" style= " ">
+        <h1>QUICK QUIZZ</h1>
+        <h2 style="padding: 20px; color: red;">Bạn đã hoàn thành bài quick quizz này rồi! <br> Chúc bạn có ngày 2/9 thật vui vẻ!</h2>
+        <a href="xemlaidiem.html"">Xem lại điểm</a>
       </div>
     `;
     return;
